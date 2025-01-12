@@ -188,5 +188,6 @@ export const navigationLinks = [
       video: "/sample-video.mp4?updatedAt=1722593504152",
       summary:
         "Morgan Housel explores the unique behaviors and mindsets that shape financial success and decision-making.",
+      isLoanedBook: true,
     },
   ];
