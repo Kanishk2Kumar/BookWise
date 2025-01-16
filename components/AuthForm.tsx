@@ -24,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
 import ImageUpload from "./ImageUpload";
+import { toast } from "@/hooks/use-toast";
 
 interface Props<T extends FieldValues> {
   schema: ZodType<T>;
@@ -51,11 +52,17 @@ const AuthForm = <T extends FieldValues>({
     const result = await onSubmit(data);
 
     if (result.success) {
-      console.log("Success");
+      toast({
+        title: "Success",
+        description: isSignIn ? "You have been signed in successfully": "You have been signed up successfully",
+      })
 
       router.push("/");
     } else {
-      console.log("Failed");
+      toast({
+        title: "Error",
+        description: isSignIn ? "SignIn failed": "SignUp failed",
+      })
     }
   };
   return (
