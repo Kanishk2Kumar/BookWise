@@ -9,8 +9,8 @@ interface Props {
 const ColorPicker = ({ value, onPickerChange }: Props) => {
   return (
     <div className="relative">
-      <div className="flex flex-row items-center">
-        <p>#</p>
+      <div className="flex flex-row items-center mb-2 border-[1px] border-gray-400 p-1 rounded-md max-w-[200px]">
+        <p className="">#</p>
         <HexColorInput
           color={value}
           onChange={onPickerChange}
