@@ -5,6 +5,29 @@ import { books, borrowRecords } from "@/database/schema";
 import { eq } from "drizzle-orm";
 import dayjs from "dayjs";
 
+export const getBooks = async () => {
+  try {
+    const results = await db.select().from(books);
+    
+    return results.map((book) => ({
+      ...book,
+      createdAt: book.createdAt ? book.createdAt.toISOString() : "", // ✅ Convert to string
+    }));
+  } catch (error) {
+    console.error("Error fetching books:", error);
+    return [];
+  }
+};
+
+export const deleteBook = async (id: string) => {
+  try {
+    await db.delete(books).where(eq(books.id, id)); // ✅ Use eq() for correct type handling
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting book:", error);
+    return { success: false, error: "Failed to delete book." };
+  }
+};
 export const borrowBook = async (params: BorrowBookParams) => {
   const { userId, bookId } = params;
 
